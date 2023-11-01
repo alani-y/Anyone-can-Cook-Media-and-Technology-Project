@@ -16,4 +16,3 @@ void loop() {
     myservo.write(0);
   }
 }
-jliydcik,yv
