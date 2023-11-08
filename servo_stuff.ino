@@ -1,21 +1,27 @@
-#include <Servo.h> 
-Servo myservo;
-const int buttonPin = 2; 
+#include <Servo.h>
+
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+
+int pos = 0;    // variable to store the servo position
+float inputVoltage = 0.0; //variable to store the voltage reading
 
 void setup() {
-  // put your setup code here, to run once:
-  myservo.attach(9);
-  pinMode(buttonPin, INPUT);
+  myservo.attach(9);  // attaches the servo on pin 9 to the servo object
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  if(digitalRead(buttonPin) == HIGH){
-    myservo.write(180);
-  } else { 
-    myservo.write(0);
+  int analogValue = analogRead(A5);
+  inputVoltage = (analogValue * 5.0)/ 1024.0;
+  roundedVoltage = round(inputVoltage);
+  Serial.println(roundedVoltage);
+  for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
+  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
   }
 }
-
-
-// hello
