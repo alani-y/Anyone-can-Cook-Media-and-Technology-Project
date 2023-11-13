@@ -4,6 +4,7 @@ Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
 
 const int buttonPin = 2;
+const int fridgePin = 4;
 int pos = 0;    // variable to store the servo position
 int inputVoltage = 0;
 
@@ -13,6 +14,7 @@ void setup() {
   Serial.begin(9600); 
   myservo.attach(9);  // attaches the servo on pin 9 to the servo 
   pinMode(buttonPin, INPUT);
+  pinMode(fridgePin, INPUT);
 }
 
 void loop() {
@@ -23,6 +25,12 @@ void loop() {
   }
   else{
     Serial.println("low");
+  }
+  
+  Serial.println(digitalRead(fridgePin));
+
+  if (digitalRead(fridgePin) == 0) {  // this function opens the fridge when linguine approaches
+    rotateServo(90);
   }
 
 }
