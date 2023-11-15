@@ -58,5 +58,3 @@ int rotateServo(int degrees, int i, bool rotateOnce){ // function that controls 
     }
   }
 }
-
-
