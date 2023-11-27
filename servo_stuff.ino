@@ -11,6 +11,8 @@ const int buttonPin2 = 4;
 const int buttonPin3 = 8;
 const int fridgeLedPin = 10;
 const int stoveLedPin = 11;
+const int circuitPins[] = {buttonPin1, buttonPin2, buttonPin3};
+const int ledPins[] = {fridgeLedPin, stoveLedPin};
 const int servoPins[] = {3,5,7};
 
 int pos = 0;    // variable to store the servo position
@@ -18,6 +20,7 @@ int buttonState1 = 0; //   circuit status variable
 int buttonState2 = 0;
 int buttonState3 = 0;
 int stoveButton = 0;
+int buttonStatesList[] = {buttonState1, buttonState2, buttonState3, stoveButton};
 
 void setup() {
   Serial.begin(9600); 
@@ -27,13 +30,18 @@ void setup() {
   }
   pinMode(buttonPin1, INPUT);
   pinMode(buttonPin2, INPUT);
+  pinMode(buttonPin3, INPUT);
   pinMode(fridgeLedPin, OUTPUT);
   pinMode(stoveLedPin, OUTPUT);
 }
 
 void loop() {
-   // circuit to open the fridge
-  buttonState1 = digitalRead(buttonPin1);
+   // open the fridge and turn on fridge light
+  readButton(0, 0, true, 0, 90, 0);
+
+
+  
+  /*buttonState1 = digitalRead(buttonPin1);
   if (buttonState1 == HIGH) {
     digitalWrite(fridgeLedPin, HIGH);
     rotateServo(90, 0);
@@ -55,6 +63,19 @@ void loop() {
   buttonState3 = digitalRead(buttonPin3);
   if (buttonState3 == HIGH){
     rotateServo(90, 2);
+  }*/
+}
+
+int readButton(int buttonIndex, int circuitPinsIndex, bool ledTrue, int ledPinsIndex, int degrees, int i) {
+  buttonStatesList[buttonIndex] = digitalRead(circuitPins[circuitPinsIndex]);
+  if (buttonStatesList[buttonIndex] == HIGH) {
+    if (ledTrue == true) {
+      digitalWrite(ledPins[ledPinsIndex], HIGH);
+    }
+    rotateServo(degrees, i);
+  }
+  else {
+    Serial.println("low");
   }
 }
 
