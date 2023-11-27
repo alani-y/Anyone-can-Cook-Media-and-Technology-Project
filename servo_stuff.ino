@@ -9,7 +9,7 @@ Servo servo[] = {fridgeservo, armservo, remyservo}; // This array stores all the
 const int buttonPin1 = 12;
 const int buttonPin2 = 4;
 const int buttonPin3 = 8;
-const int servoPins[] = {3,5,6};
+const int servoPins[] = {3,5,7};
 
 int pos = 0;    // variable to store the servo position
 int buttonState1 = 0; // button status variable
