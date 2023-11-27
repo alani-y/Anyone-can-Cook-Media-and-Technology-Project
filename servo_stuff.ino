@@ -37,6 +37,7 @@ void loop() {
   if (buttonState1 == HIGH) {
     digitalWrite(fridgeLedPin, HIGH);
     rotateServo(90, 0);
+    digitalWrite(fridgeLedPin, LOW);
   }
   else {
     Serial.println("low");
@@ -44,7 +45,7 @@ void loop() {
   // circuit that turns on stove light
   stoveButton = digitalRead(stoveLedPin);
   if (stoveButton == HIGH) {
-    digitalWrite(stoveLedPin, OUTPUT);
+    digitalWrite(stoveLedPin, HIGH);
   }
   // circuit that moves Linguine's arm
   buttonState2 = digitalRead(buttonPin2);
