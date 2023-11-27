@@ -40,11 +40,13 @@ void loop() {
   if (buttonState2 == HIGH){
     rotateServo(90, 1);
   }
-  // button that moves Remy
+  // button that swivels remy around
   buttonState3 = digitalRead(buttonPin3);
   if (buttonState3 == HIGH){
     rotateServo(90, 2);
   }
+  
+  // 
 }
 
 int rotateServo(int degrees, int i){ // function that controls the servos
