@@ -1,8 +1,8 @@
 #include <Servo.h>
 
-Servo fridgeservo;
-Servo armservo;
-Servo remyservo;
+Servo fridgeservo; // servo in the fridge hinge
+Servo armservo;  // servo in linguine's arm
+Servo remyservo; // servo underneath remy that spins him around
 
 Servo servo[] = {fridgeservo, armservo, remyservo}; // This array stores all the servo objects
 
@@ -10,7 +10,6 @@ const int buttonPin1 = 12;
 const int buttonPin2 = 4;
 const int buttonPin3 = 8;
 const int stoveLedPin = 10;
-const int fridgeLedPin = 11;
 const int stoveButtonPin = 4;
 const int servoPins[] = {3,5,7};
 
@@ -36,9 +35,7 @@ void loop() {
    // circuit to open the fridge
   buttonState1 = digitalRead(buttonPin1);
   if (buttonState1 == HIGH) {
-    digitalWrite(fridgeLedPin, HIGH);
-    rotateServo(120, 0, 0);
-    digitalWrite(fridgeLedPin, LOW);
+    rotateServo(120, 0, 0); // rotates the fridge servo
   }
   else {
     Serial.println("low");
@@ -47,23 +44,24 @@ void loop() {
   stoveButton = digitalRead(stoveButtonPin); // Linguine interacting with the stove
   if (stoveButton == HIGH) {
     digitalWrite(stoveLedPin, HIGH);
-    rotateServo(90, 1, 0);
+    rotateServo(90, 1, 0); // moves Linguine's arm
     digitalWrite(stoveLedPin, LOW);
   }
   // circuit that moves Linguine's arm
   buttonState2 = digitalRead(buttonPin2);
   if (buttonState2 == HIGH){
     digitalWrite(stoveLedPin, HIGH);
-    rotateServo(90, 1, 0);
+    rotateServo(90, 1, 0); 
     digitalWrite(stoveLedPin, LOW);
   }
-  // circuit that moves remy 
+  // circuit that rotates remy when doused with wine/tomato juice 
   buttonState3 = digitalRead(buttonPin3);
   if (buttonState3 == HIGH){
     rotateServo(180, 2, 3000);
   }
 }
 
+// function that controls the servo
 int rotateServo(int degrees, int i, int pause){ // function that controls the servos
   for (pos = 0; pos <= degrees; pos += 1) { // goes from 0 degrees to 180 degrees
     Serial.println("rotate");
